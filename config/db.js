@@ -1,13 +1,14 @@
 const sql = require('mssql');
+require('dotenv').config();
 const { MongoClient } = require('mongodb');
 
 // SQL Server configuration
 const sqlConfig = {
-    user: 'sa', // Username
-    password: 'Test@Sql@3(*)', // Password
-    server: '13.234.117.179', // Server IP address
+    user: process.env.SQL_USER, 
+    password: process.env.SQL_PASSWORD, // Password
+    server: process.env.SQL_SERVER, // Server IP address
     port: 1433, // Port
-    database: 'BizSol', // Database name
+    database: process.env.SQL_DATABASE, // Database name
     options: {
         encrypt: true, // Use this if you're on Windows Azure
         trustServerCertificate: true, // Use this to skip SSL certificate validation (for local dev/testing)
@@ -15,7 +16,7 @@ const sqlConfig = {
 };
 
 // MongoDB configuration
-const mongoUri = 'mongodb+srv://divyansh2004mhj:Xs0gIemQnqnhdhpT@food-miles.5ivi1wn.mongodb.net/Customer2?retryWrites=true&w=majority&appName=Food-Miles'; 
+const mongoUri = process.env.MONGO_URI; 
 const mongoClient = new MongoClient(mongoUri);
 let mongoDb; // Global variable to store the database reference
 
